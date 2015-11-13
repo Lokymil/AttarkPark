@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="fr.esiea.mobile.attrackpark.SearchFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_search_fragment"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/title_search_fragment"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_below="@id/title_search_fragment"
+        android:text="@string/search"
+        android:id="@+id/editText_search_fragment"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:layout_below="@id/editText_search_fragment"
+        android:id="@+id/searchButton_search_fragment"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchButton_search_fragment"
+        android:id="@+id/list_search_fragment"></ListView>
+
+</RelativeLayout>
