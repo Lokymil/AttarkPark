@@ -4,15 +4,10 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
@@ -28,14 +23,13 @@ import fr.esiea.mobile.attrackpark.domain.Parks;
  */
 public class DetailPark extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    public static final String ARG_PARK_ID = "idPark";
 
-    private EditText editText;
-    private ListView listView;
-    private Button buttonSearch;
-    private ArrayAdapter<Park> arrayAdapter;
+    // Element from the fragment's layout
+    private TextView description;
 
-    private String mParam1;
+    // Selected park's id
+    private Long idPark;
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,14 +37,14 @@ public class DetailPark extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param idPark Parameter 1.
      * @return A new instance of fragment DetailPark.
      */
     // TODO: Rename and change types and number of parameters
-    public static DetailPark newInstance(String param1) {
+    public static DetailPark newInstance(Long idPark) {
         DetailPark fragment = new DetailPark();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putLong(ARG_PARK_ID, idPark);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,7 +57,7 @@ public class DetailPark extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            idPark = getArguments().getLong(ARG_PARK_ID);
         }
     }
 
@@ -73,8 +67,20 @@ public class DetailPark extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_detail_park, container, false);
 
+        // Instanciate the element from the layout
+        description = (TextView) rootView.findViewById(R.id.description_detail);
+        // Replace the informations with the informations of the selected park
+        refresh(idPark);
+
         return rootView;
     }
+
+    // Refresh the displayed informations with the selected park's informations
+    public void refresh(Long idPark) {
+        Park mPark = Parks.getInstance().getParkById(idPark);
+        description.setText(mPark.getDescription());
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

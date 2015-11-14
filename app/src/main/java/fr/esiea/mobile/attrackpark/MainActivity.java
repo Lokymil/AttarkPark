@@ -11,6 +11,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    // Element from the main activity, instanciate in onCreate method
     private Button searchButton;
     private Button locateButton;
 
@@ -19,9 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Instanciate the searchButton from the main activity
         searchButton = (Button) findViewById(R.id.search_button_main);
         searchButton.setOnClickListener(this);
 
+        // Instanciate the locateButton from the main activity
         locateButton = (Button) findViewById(R.id.location_button_main);
         locateButton.setOnClickListener(this);
     }
@@ -48,13 +51,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+
+    // Behavior when clicking a button in the main activity
     @Override
     public void onClick(View v) {
+
         if (searchButton.getId() == v.getId()){
+            // Behavior when the search button is clicked
             Log.d("Button", "Click on searchButton from MainActivity");
+            // Launch the ParkActivity
             Intent nextActivity = new Intent(this, ParkActivity.class);
             startActivity(nextActivity);
         } else if (locateButton.getId() == v.getId()){
+            // Behavior whent the locate button is clicked
             Log.d("Button", "Click on locateButton from MainActivity");
         } else {
             Log.d("Button", "Click on MainActivity's button " + v.getId() + " not implemented");
