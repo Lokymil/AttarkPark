@@ -4,17 +4,16 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
@@ -35,7 +34,6 @@ public class SearchFragment extends Fragment {
 
     // Element from the layout, instanciated in onCreateView() method
     private EditText editText;
-    private Button searchButton;
     private ListView listView;
 
     // Adapter to fill the ListView, instanciated in onCreatView() method
@@ -80,8 +78,6 @@ public class SearchFragment extends Fragment {
         // Retrieve element from the layout
             // Search field
         editText = (EditText) rootView.findViewById(R.id.editText_search_fragment);
-            // Button to apply filter defined in search field
-        searchButton = (Button) rootView.findViewById(R.id.searchButton_search_fragment);
             // ListView to display park's list
         listView = (ListView) rootView.findViewById(R.id.list_search_fragment);
 
@@ -100,12 +96,26 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        // Set the behavior when the search button is clicked
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        // Set behavior on EditText change to filter the list
+        editText.addTextChangedListener(new TextWatcher() {
+            // Nothing to do before
             @Override
-            public void onClick(View v) {
-                Log.d("Button", "Search park button is clicked with edit text value " + editText.getText().toString());
-                arrayAdapter.getFilter().filter(editText.getText());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            // Nothing to do during the change
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            // Behavior once the text has been changed
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d("EditText","editText content from searchFrag has changed to " + s.toString());
+                // Apply filter on the list to obtain only the matching park name
+                arrayAdapter.getFilter().filter(s.toString());
             }
         });
 
