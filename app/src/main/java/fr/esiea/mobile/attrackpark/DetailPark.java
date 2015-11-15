@@ -78,6 +78,9 @@ public class DetailPark extends Fragment {
     // Refresh the displayed informations with the selected park's informations
     public void refresh(Long idPark) {
         Park mPark = Parks.getInstance().getParkById(idPark);
+        if (mPark == null) {
+            mPark = Parks.getInstance().getParks().get(0);
+        }
         description.setText(mPark.getDescription());
     }
 

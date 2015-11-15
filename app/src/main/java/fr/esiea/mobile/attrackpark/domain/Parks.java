@@ -38,11 +38,11 @@ public class Parks {
     }
 
     public void init(){
-        this.addPark(new Park((long) 0,"park1","descrip1","www.google.fr","style"));
-        this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr","style"));
-        this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr","stylebis"));
-        this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr","stylebis"));
-        this.addPark(new Park((long) 4,"park5","descrip5","www.google.fr","stylebis"));
+        this.addPark(new Park((long) 0,"park1","descrip1","www.google.fr"));
+        this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr"));
+        this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr"));
+        this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr"));
+        this.addPark(new Park((long) 4,"park5","descrip5","www.google.fr"));
     }
 
 }

@@ -11,14 +11,12 @@ public class Park {
     private String url;
     private String location;
     private String image;
-    private String style;
 
-    public Park(Long id, String name, String description, String url, String style) {
+    public Park(Long id, String name, String description, String url) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
-        this.style = style;
     }
 
     public Long getId() {
@@ -67,14 +65,6 @@ public class Park {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
     }
 
     @Override

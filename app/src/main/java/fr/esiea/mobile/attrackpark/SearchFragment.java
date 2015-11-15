@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
 
@@ -87,7 +89,7 @@ public class SearchFragment extends Fragment {
             // The park's list is to be displayed
         arrayAdapter = new ArrayAdapter<Park>(getActivity(), android.R.layout.simple_list_item_1, Parks.getInstance().getParks());
         listView.setAdapter(arrayAdapter);
-        // Set the behavior <hen a list's item is clicked
+        // Set the behavior when a list's item is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,6 +97,15 @@ public class SearchFragment extends Fragment {
                 Log.d("List","Park selected " + selected.getName());
                 // call the method from the interface, this method will be implemented in the activity using this fragment
                 mListener.onParkSelected(selected.getId());
+            }
+        });
+
+        // Set the behavior when the search button is clicked
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button", "Search park button is clicked with edit text value " + editText.getText().toString());
+                arrayAdapter.getFilter().filter(editText.getText());
             }
         });
 
