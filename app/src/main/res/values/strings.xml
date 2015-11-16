@@ -16,5 +16,9 @@
     <string name="title_activity_park">ParkActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="google_maps_key">AIzaSyB0SX9xlGMXscJ8PIlHZldYZMJL4qui6l4</string>
 
 </resources>

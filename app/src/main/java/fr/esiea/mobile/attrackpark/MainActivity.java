@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (locateButton.getId() == v.getId()){
             // Behavior whent the locate button is clicked
             Log.d("Button", "Click on locateButton from MainActivity");
+            // Launch the MapsActivity
+            Intent nextActivity = new Intent(this, MapsActivity.class);
+            startActivity(nextActivity);
         } else {
             Log.d("Button", "Click on MainActivity's button " + v.getId() + " not implemented");
         }
