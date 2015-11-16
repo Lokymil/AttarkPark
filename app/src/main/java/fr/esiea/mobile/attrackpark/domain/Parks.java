@@ -38,7 +38,7 @@ public class Parks {
     }
 
     public void init(){
-        this.addPark(new Park((long) 0,"park1","descrip1","www.google.fr"));
+        this.addPark(new Park((long) 0,"Parc Asterix","Parc sur l'univers de la célèbre BD du même nom","http://www.parcasterix.fr/"));
         this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr"));
         this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr"));
         this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr"));

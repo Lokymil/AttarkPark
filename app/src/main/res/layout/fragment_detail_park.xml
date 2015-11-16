@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/description_detail"
         android:layout_centerHorizontal="true"
-        android:text="@string/website_park"/>
+        android:text="@string/website_park"
+        android:id="@+id/url_website_detail"/>
 
 </RelativeLayout>

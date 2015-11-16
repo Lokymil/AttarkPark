@@ -1,12 +1,15 @@
 package fr.esiea.mobile.attrackpark;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import fr.esiea.mobile.attrackpark.domain.Park;
@@ -21,15 +24,17 @@ import fr.esiea.mobile.attrackpark.domain.Parks;
  * Use the {@link DetailPark#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetailPark extends Fragment {
+public class DetailPark extends Fragment implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PARK_ID = "idPark";
 
     // Element from the fragment's layout
     private TextView description;
-
+    private Button goToUrlButton;
     // Selected park's id
     private Long idPark;
+    // Selected park's url
+    private String urlPark;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,19 +74,24 @@ public class DetailPark extends Fragment {
 
         // Instanciate the element from the layout
         description = (TextView) rootView.findViewById(R.id.description_detail);
+        goToUrlButton = (Button) rootView.findViewById(R.id.url_website_detail);
         // Replace the informations with the informations of the selected park
         refresh(idPark);
+
+        // Set behavior for interaction with activity
+        goToUrlButton.setOnClickListener(this);
 
         return rootView;
     }
 
-    // Refresh the displayed informations with the selected park's informations
+    // Refresh the displayed and saved informations with the selected park's informations
     public void refresh(Long idPark) {
         Park mPark = Parks.getInstance().getParkById(idPark);
         if (mPark == null) {
             mPark = Parks.getInstance().getParks().get(0);
         }
         description.setText(mPark.getDescription());
+        urlPark = mPark.getUrl();
     }
 
 
@@ -107,6 +117,15 @@ public class DetailPark extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == goToUrlButton.getId()) {
+            Log.d("Button", "Button to go to official website has been clicked");
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPark));
+            startActivity(browserIntent);
+        }
     }
 
     /**
