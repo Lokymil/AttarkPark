@@ -20,6 +20,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ServiceConfigurationError;
 
+import fr.esiea.mobile.attrackpark.domain.Park;
+import fr.esiea.mobile.attrackpark.domain.Parks;
+
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -65,6 +68,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         }
 
         setUpMapIfNeeded();
+
+        if (mMap != null) {
+            for (Park park : Parks.getInstance().getParks()) {
+                mMap.addMarker(new MarkerOptions().position(park.getLatLng()).title(park.getName()));
+            }
+        }
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
@@ -134,7 +143,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private void setUpMap(LatLng latLng) {
         Log.d("Map", "Set map on given coordinates");
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(12).build()));
+        mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
     }
 
     @Override
@@ -144,9 +154,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
             if (latLng == null) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
             } else {
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(12).build()));
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
             }
         }
     }
