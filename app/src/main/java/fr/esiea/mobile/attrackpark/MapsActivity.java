@@ -14,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -23,13 +24,27 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager locationManager;
-    private final long UPDATE_LOCATION_TIME = 60000;
-    private final float UPDATE_LOCATION_DISTANCE = 1000;
+    private final long UPDATE_LOCATION_TIME = 300000;
+    private final float UPDATE_LOCATION_DISTANCE = 10000;
+
+    private LatLng latLng = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null && !b.isEmpty()) {
+            Log.d("Map","Has lat and lon");
+            double lat = b.getDouble("latitude");
+            double lon = b.getDouble("longitude");
+            latLng = new LatLng(lat,lon);
+            Log.d("Map","lat " + lat + " lon " + lon);
+        } else {
+            latLng = null;
+        }
+
         setUpMapIfNeeded();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
@@ -37,11 +52,23 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onResume() {
         super.onResume();
+
+        Bundle b = getIntent().getExtras();
+        if (b != null && !b.isEmpty()) {
+            Log.d("Map","Has lat and lon");
+            double lat = b.getDouble("latitude");
+            double lon = b.getDouble("longitude");
+            latLng = new LatLng(lat,lon);
+            Log.d("Map","lat " + lat + " lon " + lon);
+        } else {
+            latLng = null;
+        }
+
         setUpMapIfNeeded();
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        String theBestProvider = locationManager.getBestProvider(criteria,true);
+        String theBestProvider = locationManager.getBestProvider(criteria, true);
         try {
             locationManager.requestLocationUpdates(theBestProvider, UPDATE_LOCATION_TIME, UPDATE_LOCATION_DISTANCE, this);
         } catch (SecurityException e){
@@ -79,12 +106,17 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
+            Log.d("Map","mMap is null");
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
+                if (this.latLng == null) {
+                    setUpMap();
+                } else {
+                    setUpMap(latLng);
+                }
             }
         }
     }
@@ -96,16 +128,26 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        Log.d("Map","Set map on user");
         mMap.setMyLocationEnabled(true);
+    }
+
+    private void setUpMap(LatLng latLng) {
+        Log.d("Map", "Set map on given coordinates");
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(12).build()));
     }
 
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Position changée", Toast.LENGTH_SHORT);
         if (mMap != null){
-            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+            if (latLng == null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+            } else {
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(12).build()));
+            }
         }
     }
 

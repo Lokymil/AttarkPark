@@ -31,6 +31,7 @@ public class DetailPark extends Fragment implements View.OnClickListener{
     // Element from the fragment's layout
     private TextView description;
     private Button goToUrlButton;
+    private Button locatePark;
     // Selected park's id
     private Long idPark;
     // Selected park's url
@@ -75,11 +76,13 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         // Instanciate the element from the layout
         description = (TextView) rootView.findViewById(R.id.description_detail);
         goToUrlButton = (Button) rootView.findViewById(R.id.url_website_detail);
+        locatePark = (Button) rootView.findViewById(R.id.locate_park_detail);
         // Replace the informations with the informations of the selected park
         refresh(idPark);
 
         // Set behavior for interaction with activity
         goToUrlButton.setOnClickListener(this);
+        locatePark.setOnClickListener(this);
 
         return rootView;
     }
@@ -125,6 +128,16 @@ public class DetailPark extends Fragment implements View.OnClickListener{
             Log.d("Button", "Button to go to official website has been clicked");
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPark));
             startActivity(browserIntent);
+        } else if (v.getId() == locatePark.getId()){
+            Log.d("Button", "Button to locate park on the map");
+            Intent nextActivity = new Intent(getActivity(), MapsActivity.class);
+            Bundle b = new Bundle();
+            b.putDouble("latitude", Parks.getInstance().getParkById(idPark).getLatLng().latitude);
+            b.putDouble("longitude", Parks.getInstance().getParkById(idPark).getLatLng().longitude);
+            nextActivity.putExtras(b);
+            startActivity(nextActivity);
+        } else {
+            Log.d("Button", "Clicked not implemented " + v.getId());
         }
     }
 
