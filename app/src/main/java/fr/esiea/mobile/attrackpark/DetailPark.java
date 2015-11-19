@@ -127,18 +127,21 @@ public class DetailPark extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        // behavior for the buttons
         if (v.getId() == goToUrlButton.getId()) {
+            // behavior when the button to go to official web site is clicked
             Log.d("Button", "Button to go to official website has been clicked");
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPark));
             startActivity(browserIntent);
         } else if (v.getId() == locatePark.getId()){
+            // behavior when the button to locate the park is clicked
             Log.d("Button", "Button to locate park on the map");
-            Log.d("Button", getActivity().getTitle().toString());
-            Log.d("Button", DetailParkActivity.class.getSimpleName());
             if (getActivity().getTitle().equals(DetailParkActivity.class.getSimpleName())){
+                // if the calling application is MapsActivity, the current activity is DetailParkActivity
                 Log.d("Location", "Back to map activity");
                 getActivity().onBackPressed();
             } else {
+                // if the calling activity is MainActivity, the current activity is ParkActivity
                 Log.d("Location", "Start the map activity");
                 locatePark();
             }
@@ -147,10 +150,11 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         }
     }
 
+    // Start the MapsActivity when the location park is asked
     private void locatePark(){
         Intent nextActivity = new Intent(getActivity(), MapsActivity.class);
+        // Create a bundle to send park's coordinates to the MapsActivity
         Bundle b = new Bundle();
-        Log.d("Click","Clicked on location for park " + idPark);
         b.putDouble("latitude", Parks.getInstance().getParkById(idPark).getLatLng().latitude);
         b.putDouble("longitude", Parks.getInstance().getParkById(idPark).getLatLng().longitude);
         nextActivity.putExtras(b);

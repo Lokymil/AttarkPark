@@ -16,6 +16,7 @@ public class DetailParkActivity extends AppCompatActivity implements DetailPark.
         Bundle b = getIntent().getExtras();
         long id = b.getLong("id");
 
+        //  Update the fragment with the correct information
         DetailPark detailPark = (DetailPark) getFragmentManager().findFragmentById(R.id.fgt_detailPark);
         detailPark.refresh(id);
 
