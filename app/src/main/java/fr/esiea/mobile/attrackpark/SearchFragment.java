@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import fr.esiea.mobile.attrackpark.adapter.ParkAdapter;
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
 
@@ -37,7 +38,7 @@ public class SearchFragment extends Fragment {
     private ListView listView;
 
     // Adapter to fill the ListView, instanciated in onCreatView() method
-    private ArrayAdapter<Park> arrayAdapter;
+    private ParkAdapter arrayAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -83,7 +84,7 @@ public class SearchFragment extends Fragment {
 
         // Create adapter to fill the listView element
             // The park's list is to be displayed
-        arrayAdapter = new ArrayAdapter<Park>(getActivity(), android.R.layout.simple_list_item_1, Parks.getInstance().getParks());
+        arrayAdapter = new ParkAdapter(getActivity(), Parks.getInstance().getParks());
         listView.setAdapter(arrayAdapter);
         // Set the behavior when a list's item is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){

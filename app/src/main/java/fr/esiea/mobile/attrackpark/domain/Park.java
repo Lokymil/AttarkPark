@@ -11,16 +11,15 @@ public class Park {
     private String name;
     private String description;
     private String url;
-    private String location;
-    private String image;
-
+    private String pays;
     private LatLng latLng;
 
-    public Park(Long id, String name, String description, String url, LatLng latLng) {
+    public Park(Long id, String name, String description, String url, String pays, LatLng latLng) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
+        this.pays = pays;
         this.latLng = latLng;
     }
 
@@ -56,20 +55,12 @@ public class Park {
         this.url = url;
     }
 
-    public String getLocation() {
-        return location;
+    public String getPays() {
+        return pays;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setPays(String pays) {
+        this.pays = pays;
     }
 
     public LatLng getLatLng() {

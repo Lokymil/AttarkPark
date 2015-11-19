@@ -54,11 +54,11 @@ public class Parks {
     }
 
     public void init(){
-        this.addPark(new Park((long) 0,"Parc Asterix","Parc sur l'univers de la célèbre BD du même nom","http://www.parcasterix.fr/", new LatLng(49.1344,2.5703)));
-        this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr", new LatLng(0,0)));
-        this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr", new LatLng(0,0)));
-        this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr", new LatLng(0,0)));
-        this.addPark(new Park((long) 4,"park5","descrip5","www.google.fr", new LatLng(0,0)));
+        this.addPark(new Park((long) 0,"Parc Asterix","Parc sur l'univers de la célèbre BD du même nom","http://www.parcasterix.fr/", "France", new LatLng(49.1344,2.5703)));
+        this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr","Pays" , new LatLng(0,0)));
+        this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr","Pays" , new LatLng(0,0)));
+        this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr","Pays" , new LatLng(0,0)));
+        this.addPark(new Park((long) 4,"park5","descrip5","www.google.fr","Pays" , new LatLng(0,0)));
     }
 
 }

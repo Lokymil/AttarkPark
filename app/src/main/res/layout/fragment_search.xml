@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@id/title_search_fragment"
-        android:text="@string/search"
+        android:hint="@string/search"
         android:id="@+id/editText_search_fragment"/>
 
     <ListView
