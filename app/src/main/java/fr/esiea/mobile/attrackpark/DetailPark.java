@@ -133,16 +133,28 @@ public class DetailPark extends Fragment implements View.OnClickListener{
             startActivity(browserIntent);
         } else if (v.getId() == locatePark.getId()){
             Log.d("Button", "Button to locate park on the map");
-            Intent nextActivity = new Intent(getActivity(), MapsActivity.class);
-            Bundle b = new Bundle();
-            Log.d("Click","Clicked on location for park " + idPark);
-            b.putDouble("latitude", Parks.getInstance().getParkById(idPark).getLatLng().latitude);
-            b.putDouble("longitude", Parks.getInstance().getParkById(idPark).getLatLng().longitude);
-            nextActivity.putExtras(b);
-            startActivity(nextActivity);
+            Log.d("Button", getActivity().getTitle().toString());
+            Log.d("Button", DetailParkActivity.class.getSimpleName());
+            if (getActivity().getTitle().equals(DetailParkActivity.class.getSimpleName())){
+                Log.d("Location", "Back to map activity");
+                getActivity().onBackPressed();
+            } else {
+                Log.d("Location", "Start the map activity");
+                locatePark();
+            }
         } else {
             Log.d("Button", "Clicked not implemented " + v.getId());
         }
+    }
+
+    private void locatePark(){
+        Intent nextActivity = new Intent(getActivity(), MapsActivity.class);
+        Bundle b = new Bundle();
+        Log.d("Click","Clicked on location for park " + idPark);
+        b.putDouble("latitude", Parks.getInstance().getParkById(idPark).getLatLng().latitude);
+        b.putDouble("longitude", Parks.getInstance().getParkById(idPark).getLatLng().longitude);
+        nextActivity.putExtras(b);
+        startActivity(nextActivity);
     }
 
     /**
