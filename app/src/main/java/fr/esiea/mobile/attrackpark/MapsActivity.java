@@ -1,6 +1,7 @@
 package fr.esiea.mobile.attrackpark;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ServiceConfigurationError;
@@ -36,19 +38,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        Bundle b = getIntent().getExtras();
-        if (b != null && !b.isEmpty()) {
-            Log.d("Map","Has lat and lon");
-            double lat = b.getDouble("latitude");
-            double lon = b.getDouble("longitude");
-            latLng = new LatLng(lat,lon);
-            Log.d("Map","lat " + lat + " lon " + lon);
-        } else {
-            latLng = null;
-        }
-
-        setUpMapIfNeeded();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -74,6 +63,18 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
                 mMap.addMarker(new MarkerOptions().position(park.getLatLng()).title(park.getName()));
             }
         }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Park park = Parks.getInstance().getParkByName(marker.getTitle());
+                if (park != null){
+                    Log.d("Marker","Click on marker for park " + park.getId());
+                    MarkerClicked(park);
+                }
+                return true;
+            }
+        });
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
@@ -145,6 +146,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         Log.d("Map", "Set map on given coordinates");
         mMap.setMyLocationEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
+    }
+
+    private void MarkerClicked(Park park){
+        Intent nextActivity = new Intent(this, DetailParkActivity.class);
+        Bundle b = new Bundle();
+        b.putLong("id",park.getId());
+        nextActivity.putExtras(b);
+        startActivity(nextActivity);
     }
 
     @Override

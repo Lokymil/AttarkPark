@@ -69,8 +69,7 @@ public class ParkActivity extends AppCompatActivity implements SearchFragment.On
     public void onParkSelected(Long id) {
 
         if (findViewById(R.id.fgt_park_container) != null) {
-            // Here is the behavior for phone screen
-
+            // Here is the behavior for park screen
             // The fragment used to display informations about the selected park is instanciated
             DetailPark nextFragment = new DetailPark();
             // Park's id is given to this fragment

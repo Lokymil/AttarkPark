@@ -41,12 +41,20 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".ParkActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".DetailParkActivity"
+            android:label="@string/title_activity_detail_park" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.esiea.mobile.attrackpark.ParkActivity" />
         </activity>
     </application>
 

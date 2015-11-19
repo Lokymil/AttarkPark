@@ -93,6 +93,9 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         if (mPark == null) {
             mPark = Parks.getInstance().getParks().get(0);
         }
+        if (this.idPark == null){
+            this.idPark = idPark;
+        }
         description.setText(mPark.getDescription());
         urlPark = mPark.getUrl();
     }
@@ -132,6 +135,7 @@ public class DetailPark extends Fragment implements View.OnClickListener{
             Log.d("Button", "Button to locate park on the map");
             Intent nextActivity = new Intent(getActivity(), MapsActivity.class);
             Bundle b = new Bundle();
+            Log.d("Click","Clicked on location for park " + idPark);
             b.putDouble("latitude", Parks.getInstance().getParkById(idPark).getLatLng().latitude);
             b.putDouble("longitude", Parks.getInstance().getParkById(idPark).getLatLng().longitude);
             nextActivity.putExtras(b);
