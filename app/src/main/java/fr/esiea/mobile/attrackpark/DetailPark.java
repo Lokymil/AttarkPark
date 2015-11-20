@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
@@ -29,6 +32,8 @@ public class DetailPark extends Fragment implements View.OnClickListener{
     public static final String ARG_PARK_ID = "idPark";
 
     // Element from the fragment's layout
+    private ImageView logoPark;
+    private TextView descriptionTitle;
     private TextView description;
     private Button goToUrlButton;
     private Button locatePark;
@@ -74,6 +79,8 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         View rootView = inflater.inflate(R.layout.fragment_detail_park, container, false);
 
         // Instanciate the element from the layout
+        logoPark = (ImageView) rootView.findViewById(R.id.photo_park_detail);
+        descriptionTitle = (TextView) rootView.findViewById(R.id.description_title_detail);
         description = (TextView) rootView.findViewById(R.id.description_detail);
         goToUrlButton = (Button) rootView.findViewById(R.id.url_website_detail);
         locatePark = (Button) rootView.findViewById(R.id.locate_park_detail);
@@ -81,6 +88,7 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         refresh(idPark);
 
         // Set behavior for interaction with activity
+        logoPark.setOnClickListener(this);
         goToUrlButton.setOnClickListener(this);
         locatePark.setOnClickListener(this);
 
@@ -96,7 +104,13 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         if (this.idPark == null){
             this.idPark = idPark;
         }
+
+        // Use picasso librairy to retrieve image from web url
+        Picasso.with(getActivity()).load(mPark.getImgUrl()).into(logoPark);
+        // Set content for TextView
+        descriptionTitle.setText(mPark.getName());
         description.setText(mPark.getDescription());
+        // Set url to go the the official website
         urlPark = mPark.getUrl();
     }
 
@@ -128,8 +142,8 @@ public class DetailPark extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         // behavior for the buttons
-        if (v.getId() == goToUrlButton.getId()) {
-            // behavior when the button to go to official web site is clicked
+        if (v.getId() == goToUrlButton.getId() || v.getId() == logoPark.getId()) {
+            // behavior when the button to go to official web site or the park's logo is clicked
             Log.d("Button", "Button to go to official website has been clicked");
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPark));
             startActivity(browserIntent);

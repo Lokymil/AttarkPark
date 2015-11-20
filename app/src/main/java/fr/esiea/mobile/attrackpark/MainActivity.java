@@ -36,16 +36,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         locateButton.setOnClickListener(this);
     }
 
-
+    public void showAlert(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK", null);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
         return true;
     }
 
@@ -60,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Click sur Options", Toast.LENGTH_SHORT)
                     .show();
+            showAlert("A propos de nous","Cette application a ete realisee par Chrisophe ARRESTIER et Florianne DEROUET");
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -83,17 +83,16 @@ public class SearchFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.list_search_fragment);
 
         // Create adapter to fill the listView element
-            // The park's list is to be displayed
+            // The park's list is to be displayed with a custom adapter
         arrayAdapter = new ParkAdapter(getActivity(), Parks.getInstance().getParks());
         listView.setAdapter(arrayAdapter);
         // Set the behavior when a list's item is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Park selected = Parks.getInstance().getParks().get(position);
-                Log.d("List","Park selected " + selected.getName());
+                Log.d("List","Park selected " + id);
                 // call the method from the interface, this method will be implemented in the activity using this fragment
-                mListener.onParkSelected(selected.getId());
+                mListener.onParkSelected(id);
             }
         });
 

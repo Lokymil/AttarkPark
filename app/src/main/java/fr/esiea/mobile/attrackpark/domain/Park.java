@@ -13,14 +13,16 @@ public class Park {
     private String url;
     private String pays;
     private LatLng latLng;
+    private String imgUrl;
 
-    public Park(Long id, String name, String description, String url, String pays, LatLng latLng) {
+    public Park(Long id, String name, String description, String url, String pays, LatLng latLng, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
         this.pays = pays;
         this.latLng = latLng;
+        this.imgUrl = imgUrl;
     }
 
     public Long getId() {
@@ -73,6 +75,14 @@ public class Park {
 
     public void setLatLng(double lat, double lng){
         this.latLng = new LatLng(lat,lng);
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     @Override

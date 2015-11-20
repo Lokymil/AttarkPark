@@ -7,7 +7,9 @@
         android:layout_width="50dp"
         android:layout_height="70dp"
         android:src="@drawable/logo"
-        android:id="@+id/row_park_img"/>
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="3dp"
+        android:id="@+id/row_park_img" />
 
     <TextView
         android:layout_width="wrap_content"
