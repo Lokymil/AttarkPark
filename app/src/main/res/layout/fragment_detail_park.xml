@@ -54,8 +54,9 @@
         android:background="@drawable/rounded_button"
         android:text="@string/website_park"
         android:id="@+id/url_website_detail"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/description_detail"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="37dp" />
 
 </RelativeLayout>
