@@ -33,17 +33,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private final float UPDATE_LOCATION_DISTANCE = 10000;
 
     private LatLng latLng = null;
+    private Float zoom = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         Bundle b = getIntent().getExtras();
         if (b != null && !b.isEmpty()) {
@@ -55,7 +51,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         } else {
             latLng = null;
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         setUpMapIfNeeded();
 
         if (mMap != null) {
@@ -116,17 +116,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-            Log.d("Map","mMap is null");
+            Log.d("Map", "mMap is null");
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                if (this.latLng == null) {
                     setUpMap();
-                } else {
-                    setUpMap(latLng);
-                }
             }
         }
     }
@@ -142,13 +138,20 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         mMap.setMyLocationEnabled(true);
     }
 
-    private void setUpMap(LatLng latLng) {
+    private void moveCameraToGivenLocation(LatLng latLng, Float zoom) {
         Log.d("Map", "Set map on given coordinates");
         mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
+
+        if (zoom == null) {
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
+        }
     }
 
     private void MarkerClicked(Park park){
+        this.latLng = mMap.getCameraPosition().target;
+        this.zoom = mMap.getCameraPosition().zoom;
         Intent nextActivity = new Intent(this, DetailParkActivity.class);
         Bundle b = new Bundle();
         b.putLong("id",park.getId());
@@ -159,13 +162,16 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Position changée", Toast.LENGTH_SHORT);
-        if (mMap != null){
-            if (latLng == null) {
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        if (latLng == null){
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            Float zoom = new Float(11);
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
+        } else {
+            if (zoom == null){
+                Float zoom = new Float(11);
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
             } else {
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
             }
         }
     }
