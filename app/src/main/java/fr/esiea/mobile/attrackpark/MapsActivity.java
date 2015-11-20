@@ -27,11 +27,16 @@ import fr.esiea.mobile.attrackpark.domain.Parks;
 
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
+    // Parameter to define the map and location manager
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager locationManager;
+    // refresh user postion every 5 minutes
     private final long UPDATE_LOCATION_TIME = 300000;
+    // refresh user position every 10 km
     private final float UPDATE_LOCATION_DISTANCE = 10000;
 
+    // Lattitude, longitude and zoom to use when we go back from an activity to MapsActivity
+    // LatLng is also use when user ask to locate a park
     private LatLng latLng = null;
     private Float zoom = null;
 
@@ -41,6 +46,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         setContentView(R.layout.activity_maps);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        // Retrieve park location when is needed
+        // Is in the onCreate since the LatLng can change if user go to a child activity and come back
         Bundle b = getIntent().getExtras();
         if (b != null && !b.isEmpty()) {
             Log.d("Map","Has lat and lon");
@@ -56,17 +63,21 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onResume() {
         super.onResume();
+        // Set up the map to be used
         setUpMapIfNeeded();
 
         if (mMap != null) {
+            // add all saved parks to the map and locate them with markers
             for (Park park : Parks.getInstance().getParks()) {
                 mMap.addMarker(new MarkerOptions().position(park.getLatLng()).title(park.getName()));
             }
         }
 
+        // Define behavior when a park's marker is clicked
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                // When a marker is clicked, a new activity displaying park's detail is launched
                 Park park = Parks.getInstance().getParkByName(marker.getTitle());
                 if (park != null){
                     Log.d("Marker","Click on marker for park " + park.getId());
@@ -133,46 +144,54 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
+
+    // set up the mMap object
     private void setUpMap() {
         Log.d("Map","Set map on user");
         mMap.setMyLocationEnabled(true);
     }
 
+    // move the camera to the given location depending and latLng and zoom parameters
     private void moveCameraToGivenLocation(LatLng latLng, Float zoom) {
         Log.d("Map", "Set map on given coordinates");
         mMap.setMyLocationEnabled(true);
 
         if (zoom == null) {
+            // zoom is null then we want to locate and focus on the selected park
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(11).build()));
         } else {
+            // zoom is not null then we want to set the camera as the user set it before he launch an other activity
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
         }
     }
 
     private void MarkerClicked(Park park){
+        // Camera position is saved
         this.latLng = mMap.getCameraPosition().target;
         this.zoom = mMap.getCameraPosition().zoom;
+        // Create intent to launch the DetailParkActivity
         Intent nextActivity = new Intent(this, DetailParkActivity.class);
+        // Give the selected park id
         Bundle b = new Bundle();
         b.putLong("id",park.getId());
         nextActivity.putExtras(b);
+        // launch activity
         startActivity(nextActivity);
     }
 
+    // This method is used each time the MapsActivity is resumed
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "Position changée", Toast.LENGTH_SHORT);
+        // Set behavior depending on LatLong and zoom parameters
         if (latLng == null){
+            // latLng is null the we want to locate and focus on the user
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             Float zoom = new Float(11);
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
         } else {
-            if (zoom == null){
-                Float zoom = new Float(11);
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
-            } else {
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(latLng).zoom(zoom).build()));
-            }
+            // latLng is not null then we try either locate a park or just resume the activity as the user set it
+           moveCameraToGivenLocation(latLng,zoom);
         }
     }
 
