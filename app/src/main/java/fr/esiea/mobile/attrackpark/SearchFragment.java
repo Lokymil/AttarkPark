@@ -83,7 +83,7 @@ public class SearchFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.list_search_fragment);
 
         // Create adapter to fill the listView element
-            // The park's list is to be displayed
+            // The park's list is to be displayed with a custom adapter
         arrayAdapter = new ParkAdapter(getActivity(), Parks.getInstance().getParks());
         listView.setAdapter(arrayAdapter);
         // Set the behavior when a list's item is clicked

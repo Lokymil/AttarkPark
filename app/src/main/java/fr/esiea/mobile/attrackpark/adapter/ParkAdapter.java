@@ -25,6 +25,7 @@ import fr.esiea.mobile.attrackpark.domain.Parks;
  */
 public class ParkAdapter extends BaseAdapter implements Filterable{
 
+    // Parameter needed to display and filter the list
     private Context context;
     private List<Park> originalData = null;
     private List<Park> filteredData = null;
@@ -38,27 +39,32 @@ public class ParkAdapter extends BaseAdapter implements Filterable{
         this.mFilter = new ItemFilter();
     }
 
+    // Return the filtered list's size
     @Override
     public int getCount() {
         return filteredData.size();
     }
 
+    // Return item at given position from filtered list
     @Override
     public Object getItem(int position) {
         return filteredData.get(position);
     }
 
+    // Return item at given position's id from filtered list
     @Override
     public long getItemId(int position) {
         return filteredData.get(position).getId();
     }
 
+    // Inflate the layout and apply correct value to every field
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
         View v = view;
         RowView holder;
         if (v == null) {
+            // Inflate layout to display each list's item, in our case items are parks
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.pays_row, null);
 

@@ -55,10 +55,10 @@ public class Parks {
 
     public void init(){
         this.addPark(new Park((long) 0,"Parc Asterix","Parc sur l'univers de la célèbre BD du même nom","http://www.parcasterix.fr/", "France", new LatLng(49.1344,2.5703),"http://www.parcasterix.fr/sites/default/themes/asterix/logo.png"));
-        this.addPark(new Park((long) 1,"park2","descrip2","www.google.fr","Pays" , new LatLng(0,0), "http://www.parcasterix.fr/sites/default/themes/asterix/logo.png"));
-        this.addPark(new Park((long) 2,"park3","descrip3","www.google.fr","Pays" , new LatLng(0,0), "http://www.parcasterix.fr/sites/default/themes/asterix/logo.png"));
-        this.addPark(new Park((long) 3,"park4","descrip4","www.google.fr","Pays" , new LatLng(0,0), "http://www.parcasterix.fr/sites/default/themes/asterix/logo.png"));
-        this.addPark(new Park((long) 4,"park5","descrip5","www.google.fr","Pays" , new LatLng(0,0), "http://www.parcasterix.fr/sites/default/themes/asterix/logo.png"));
+        this.addPark(new Park((long) 1,"DisneyLand Paris","Le parc le plus connu de Paris sur l'univers de disney.","http://www.disneylandparis.fr/","France" , new LatLng(48.8687,2.7818), "https://cdn.thewaltdisneycompany.com/sites/default/files/styles/242x136_scale_crop/public/OurBusinesses_GroupView_Parks_DLP_logo.png?itok=tIxHC1rH"));
+        this.addPark(new Park((long) 2,"Europa-Park","Le plus grand parc a thème d'Allemagne et le deuxième plus populaire d'Europe.","http://www.europapark.de/fr","Allemagne" , new LatLng(48.2683,7.7208), "https://upload.wikimedia.org/wikipedia/en/4/45/EuropaPark_logo.jpg"));
+        this.addPark(new Park((long) 3,"Port Aventura","Grand parc à thème d'Espagne.","http://fr.portaventura.com/","Espagne" , new LatLng(41.0847,1.1514), "https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/PortAventura_Logo.svg/1280px-PortAventura_Logo.svg.png"));
+        this.addPark(new Park((long) 4,"Futuroscope","Parc sur le thème de la technologie et de son évolution.","http://www.futuroscope.com/","France" , new LatLng(46.6692,0.3689), "https://lh5.googleusercontent.com/-BkJfKjR3Sw0/AAAAAAAAAAI/AAAAAAAAAAA/wEKQaNcuwdk/s0-c-k-no-ns/photo.jpg"));
     }
 
 }
