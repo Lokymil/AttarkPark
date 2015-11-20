@@ -11,6 +11,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class ParkAdapter extends BaseAdapter implements Filterable{
 
         Park park = (Park) getItem(position);
 
+        Picasso.with(context).load(park.getImgUrl()).into(holder.logo);
         holder.name.setText(park.getName());
         holder.pays.setText(park.getPays());
 
