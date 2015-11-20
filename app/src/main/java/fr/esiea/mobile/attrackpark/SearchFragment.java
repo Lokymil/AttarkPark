@@ -90,10 +90,9 @@ public class SearchFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Park selected = Parks.getInstance().getParks().get(position);
-                Log.d("List","Park selected " + selected.getName());
+                Log.d("List","Park selected " + id);
                 // call the method from the interface, this method will be implemented in the activity using this fragment
-                mListener.onParkSelected(selected.getId());
+                mListener.onParkSelected(id);
             }
         });
 
