@@ -3,17 +3,16 @@
     <string name="app_name">AttrackPark</string>
 
     <string name="blank_field">blank field</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="action_settings">Options</string>
+    <string name="action_home">Home</string>
     <string name="locate_user">Me localiser</string>
 
-    <string name="search">Rechercher</string>
-    <string name="title_search_fragment">Recherche</string>
+    <string name="search">Recherche</string>
 
     <string name="localisation">Localiser</string>
     <string name="description">Description</string>
     <string name="website_park">Voir le site officiel</string>
-    <string name="title_activity_park">ParkActivity</string>
+    <string name="title_activity_park">Parc Attraction</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_map">MapActivity</string>

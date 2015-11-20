@@ -17,10 +17,11 @@
             android:id="@+id/photo_park_detail"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100sp"
+            android:layout_height="40sp"
             android:text="@string/localisation"
-            android:textSize="20dp"
+            android:textSize="15sp"
+            android:background="@drawable/rounded_button"
             android:layout_gravity="center_horizontal|center_vertical"
             android:textColor="@color/black"
             android:id="@+id/locate_park_detail"/>
@@ -32,25 +33,27 @@
         android:layout_height="wrap_content"
         android:text="@string/description"
         android:layout_below="@id/grid_detail"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginBottom="10dp"
         android:id="@+id/description_title_detail"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/blank_field"
         android:layout_below="@id/description_title_detail"
-        android:textSize="20dp"
+        android:text="@string/blank_field"
+        android:textSize="20sp"
         android:layout_marginBottom="10dp"
         android:id="@+id/description_detail"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/description_detail"
-        android:layout_centerHorizontal="true"
+        android:layout_width="200sp"
+        android:layout_height="40sp"
+        android:background="@drawable/rounded_button"
         android:text="@string/website_park"
-        android:id="@+id/url_website_detail"/>
+        android:id="@+id/url_website_detail"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
 
 </RelativeLayout>

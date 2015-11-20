@@ -2,21 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="fr.esiea.mobile.attrackpark.SearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_search_fragment"
-        android:textSize="30dp"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/title_search_fragment"/>
-
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200sp"
+        android:layout_height="40sp"
         android:ems="10"
-        android:layout_below="@id/title_search_fragment"
         android:hint="@string/search"
+        android:background="@drawable/border_search"
         android:id="@+id/editText_search_fragment"/>
 
     <ListView

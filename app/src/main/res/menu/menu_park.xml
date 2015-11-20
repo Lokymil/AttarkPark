@@ -2,6 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="fr.esiea.mobile.attrackpark.ParkActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/menu_home"
+        android:title="@string/action_home"
+        android:icon="@drawable/home"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/menu_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_menu_moreoverflow_normal_holo_dark"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
 </menu>
