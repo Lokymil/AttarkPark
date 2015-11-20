@@ -7,3 +7,8 @@ Il a été réalisé par :
 
   - Christophe ARRESTIER (git : Lokymil)
   - Florianne DEROUET (git : florianne)
+
+
+Dans le cadre de ce projet, nous avons utilisé l'API Google Maps ainsi que la bibliothèque Picasso.
+
+Licence Picasso : https://github.com/square/picasso/blob/master/LICENSE.txt
