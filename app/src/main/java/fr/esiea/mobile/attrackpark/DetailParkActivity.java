@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import fr.esiea.mobile.attrackpark.fragment.DetailPark;
+
 public class DetailParkActivity extends AppCompatActivity implements DetailPark.OnFragmentInteractionListener{
 
     @Override

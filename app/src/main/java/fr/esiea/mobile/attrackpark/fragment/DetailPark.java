@@ -1,4 +1,4 @@
-package fr.esiea.mobile.attrackpark;
+package fr.esiea.mobile.attrackpark.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import fr.esiea.mobile.attrackpark.DetailParkActivity;
+import fr.esiea.mobile.attrackpark.MapsActivity;
+import fr.esiea.mobile.attrackpark.R;
 import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
 
@@ -150,7 +153,8 @@ public class DetailPark extends Fragment implements View.OnClickListener{
         } else if (v.getId() == locatePark.getId()){
             // behavior when the button to locate the park is clicked
             Log.d("Button", "Button to locate park on the map");
-            if (getActivity().getTitle().equals(DetailParkActivity.class.getSimpleName())){
+            Log.d("Button", "Activity : " +getActivity().getTitle().toString());
+            if (getActivity().getTitle().toString().equals("Détail du parc")){
                 // if the calling application is MapsActivity, the current activity is DetailParkActivity
                 Log.d("Location", "Back to map activity");
                 getActivity().onBackPressed();

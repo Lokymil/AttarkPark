@@ -56,6 +56,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.esiea.mobile.attrackpark.ParkActivity" />
         </activity>
+
+        <provider
+            android:authorities="fr.esiea.mobile.attrackpark"
+            android:name=".database.ParkContentProvider"/>
     </application>
 
 </manifest>

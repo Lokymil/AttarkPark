@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fgt_listPark"
-        android:name="fr.esiea.mobile.attrackpark.SearchFragment"
+        android:name="fr.esiea.mobile.attrackpark.fragment.SearchFragment"
         tools:layout="@layout/fragment_search"
         android:layout_weight="2"></fragment>
 
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fgt_detailPark"
-        android:name="fr.esiea.mobile.attrackpark.DetailPark"
+        android:name="fr.esiea.mobile.attrackpark.fragment.DetailPark"
         tools:layout="@layout/fragment_detail_park"
         android:layout_weight="1"></fragment>
 

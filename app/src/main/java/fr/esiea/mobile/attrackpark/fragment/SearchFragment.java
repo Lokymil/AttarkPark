@@ -1,4 +1,4 @@
-package fr.esiea.mobile.attrackpark;
+package fr.esiea.mobile.attrackpark.fragment;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -11,12 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import fr.esiea.mobile.attrackpark.R;
 import fr.esiea.mobile.attrackpark.adapter.ParkAdapter;
-import fr.esiea.mobile.attrackpark.domain.Park;
 import fr.esiea.mobile.attrackpark.domain.Parks;
 
 

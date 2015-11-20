@@ -171,6 +171,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         this.zoom = mMap.getCameraPosition().zoom;
         // Create intent to launch the DetailParkActivity
         Intent nextActivity = new Intent(this, DetailParkActivity.class);
+        Log.d("Map"," Start detail activity");
         // Give the selected park id
         Bundle b = new Bundle();
         b.putLong("id",park.getId());

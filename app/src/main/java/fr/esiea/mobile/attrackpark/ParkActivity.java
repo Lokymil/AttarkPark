@@ -1,8 +1,11 @@
 package fr.esiea.mobile.attrackpark;
 
+<<<<<<< Updated upstream
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+=======
+>>>>>>> Stashed changes
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import fr.esiea.mobile.attrackpark.fragment.DetailPark;
+import fr.esiea.mobile.attrackpark.fragment.SearchFragment;
 
 public class ParkActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener, DetailPark.OnFragmentInteractionListener {
 

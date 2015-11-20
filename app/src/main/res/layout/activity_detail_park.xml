@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fgt_detailPark"
-        android:name="fr.esiea.mobile.attrackpark.DetailPark"
+        android:name="fr.esiea.mobile.attrackpark.fragment.DetailPark"
         tools:layout="@layout/fragment_detail_park"></fragment>
 
 </RelativeLayout>
