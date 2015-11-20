@@ -13,14 +13,14 @@
     <string name="localisation">Localiser</string>
     <string name="description">Description</string>
     <string name="website_park">Voir le site officiel</string>
-    <string name="title_activity_park">ParkActivity</string>
+    <string name="title_activity_park">Liste des parcs</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_map">Carte</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="google_maps_key">AIzaSyB0SX9xlGMXscJ8PIlHZldYZMJL4qui6l4</string>
-    <string name="title_activity_detail_park">DetailParkActivity</string>
+    <string name="title_activity_detail_park">Détail du parc</string>
     <string name="title_activity_test">test</string>
 
 </resources>
